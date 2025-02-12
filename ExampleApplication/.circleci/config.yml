@@ -1,23 +1,17 @@
- version: 2.1
+version: 2.1
 
 jobs:
-  test:
+  build:
     docker:
-      - image: circleci/node:14 # or the version of Node you're using
+      - image: circleci/python:3.8
     steps:
       - checkout
       - run:
-          name: Install dependencies
-          command: |
-            npm install
-      - run:
           name: Run tests
-          command: |
-            npm run test
+          command: python -m unittest discover
 
 workflows:
   version: 2
-  test:
+  build:
     jobs:
-      - test
-
+      - build
